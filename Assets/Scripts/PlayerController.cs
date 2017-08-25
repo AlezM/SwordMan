@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
 	public float speedLimit = 1;
 
 	bool flip = false;
-	public SpriteRenderer graphycs;
+	public SpriteFlipper graphycs;
 	public GameObject frontArm;
 	public GameObject backArm;
 
@@ -30,14 +30,12 @@ public class PlayerController : MonoBehaviour {
 	
 		if (horizontal > 0 && flip) {
 			flip = false;
-			graphycs.flipX = false;
-			graphycs.sortingOrder = 0;
+			graphycs.Flip(false, 0);
 			frontArm.SetActive (true);
 			backArm.SetActive (false);
 		} else if (horizontal < 0 && !flip){
 			flip = true;
-			graphycs.flipX = true;
-			graphycs.sortingOrder = 3;
+			graphycs.Flip(true, 3);
 			frontArm.SetActive (false);
 			backArm.SetActive (true);
 		}
