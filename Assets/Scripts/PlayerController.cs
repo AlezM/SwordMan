@@ -8,7 +8,10 @@ public class PlayerController : MonoBehaviour {
 	public float jumpSpeed = 10;
 	public float speedLimit = 1;
 
-	public GameObject front;
+	bool flip = false;
+	public SpriteRenderer graphycs;
+	public GameObject frontArm;
+	public GameObject backArm;
 
 	Rigidbody2D rb2D;
 
@@ -21,14 +24,23 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void Movement (JoystickInfo joystickInfo) {
-		float horizontal = joystickInfo.position.x * moveSpeed;
+		float horizontal = ((Mathf.Abs(joystickInfo.position.x) > 0.1f)? joystickInfo.position.x : 0) * moveSpeed;
 		float vertical = Mathf.Clamp(joystickInfo.deltaPosition.y, -speedLimit, speedLimit)  * jumpSpeed;
 
-		transform.eulerAngles = new Vector3 (0, (horizontal > 0)? 0 : 180, 0);
-		if (horizontal > 0)
-			front.SetActive (false);
-		else 
-			front.SetActive (true);
+	
+		if (horizontal > 0 && flip) {
+			flip = false;
+			graphycs.flipX = false;
+			graphycs.sortingOrder = 0;
+			frontArm.SetActive (true);
+			backArm.SetActive (false);
+		} else if (horizontal < 0 && !flip){
+			flip = true;
+			graphycs.flipX = true;
+			graphycs.sortingOrder = 3;
+			frontArm.SetActive (false);
+			backArm.SetActive (true);
+		}
 
 		rb2D.velocity = new Vector2 (horizontal, rb2D.velocity.y + vertical);			
 	}
