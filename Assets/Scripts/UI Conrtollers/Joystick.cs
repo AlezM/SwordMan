@@ -23,29 +23,26 @@ public class JoystickInfo {
 }
 
 [System.Serializable]
-public class FloatEvent : UnityEvent<JoystickInfo> {}
+public class JoystickEvent : UnityEvent<JoystickInfo> {}
 
 public class Joystick : MonoBehaviour {
 
-	public Transform stick;
-	public float joySize = 10;
-	public float joyRadius = 8;
+	public float touchZoneSize = 18;
+	public float radius = 12;
 
-	public FloatEvent OnClick;
+	public JoystickEvent onClick;
 
 	Camera cam;
 	bool clicked = false;
+	Transform stick;
 	Vector2 stickPrevPos;
 
-	JoystickInfo joystickInfo;
-
-	bool touchSupported;
 	Touch touch;
 	int fingerId;
 
 	void Start () {
 		cam = Camera.main;
-		touchSupported = Input.touchSupported;
+		stick = transform.GetChild (0);
 	}
 
 	void Update () {
@@ -71,12 +68,12 @@ public class Joystick : MonoBehaviour {
 		for (int i = 0; i < Input.touchCount && !clicked; i++) {
 			if (Input.GetTouch (i).phase == TouchPhase.Began) {
 				Vector2 touchWorldPos = cam.ScreenToWorldPoint (Input.GetTouch (i).position);
-				if (Vector2.Distance (touchWorldPos, (Vector2)transform.position) < joySize) {
+				if (Vector2.Distance (touchWorldPos, (Vector2)transform.position) < touchZoneSize) {
 					touch = Input.GetTouch (i);
 					fingerId = touch.fingerId;
 					stick.position = touchWorldPos;
-					if (stick.localPosition.magnitude > joyRadius)
-						stick.localPosition = stick.localPosition.normalized * joyRadius;
+					if (stick.localPosition.magnitude > radius)
+						stick.localPosition = stick.localPosition.normalized * radius;
 
 					stickPrevPos = stick.localPosition;
 
@@ -92,24 +89,23 @@ public class Joystick : MonoBehaviour {
 
 		if (clicked) {
 			stick.position = (Vector2)cam.ScreenToWorldPoint (touch.position);
-			if (stick.localPosition.magnitude > joyRadius)
-				stick.localPosition = stick.localPosition.normalized * joyRadius;
+			if (stick.localPosition.magnitude > radius)
+				stick.localPosition = stick.localPosition.normalized * radius;
 
 			Vector2 delta = (Vector2)stick.localPosition - stickPrevPos;
 			stickPrevPos = stick.localPosition;
-			joystickInfo = new JoystickInfo (stick.localPosition / joyRadius, delta / joyRadius);
 
-			OnClick.Invoke(joystickInfo);
+			onClick.Invoke(new JoystickInfo (stick.localPosition / radius, delta / radius));
 		}
 	}
 
 	void EditorControl () {
 		if (Input.GetMouseButtonDown (0)) {
 			Vector2 mouseWorldPos = cam.ScreenToWorldPoint (Input.mousePosition);
-			if (Vector2.Distance (mouseWorldPos, (Vector2)transform.position) < joySize) {
+			if (Vector2.Distance (mouseWorldPos, (Vector2)transform.position) < touchZoneSize) {
 				stick.position = (Vector2)cam.ScreenToWorldPoint (Input.mousePosition);
-				if (stick.localPosition.magnitude > joyRadius)
-					stick.localPosition = stick.localPosition.normalized * joyRadius;
+				if (stick.localPosition.magnitude > radius)
+					stick.localPosition = stick.localPosition.normalized * radius;
 
 				stickPrevPos = stick.localPosition;
 
@@ -124,20 +120,13 @@ public class Joystick : MonoBehaviour {
 
 		if (clicked) {
 			stick.position = (Vector2)cam.ScreenToWorldPoint (Input.mousePosition);
-			if (stick.localPosition.magnitude > joyRadius)
-				stick.localPosition = stick.localPosition.normalized * joyRadius;
+			if (stick.localPosition.magnitude > radius)
+				stick.localPosition = stick.localPosition.normalized * radius;
 
 			Vector2 delta = (Vector2)stick.localPosition - stickPrevPos;
 			stickPrevPos = stick.localPosition;
-			joystickInfo = new JoystickInfo (stick.localPosition / joyRadius, delta / joyRadius);
 
-			OnClick.Invoke(joystickInfo);
+			onClick.Invoke(new JoystickInfo (stick.localPosition / radius, delta / radius));
 		}
-	}
-
-	void OnDrawGizmos () {
-		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere (transform.position, joySize);
-		Gizmos.DrawWireSphere (transform.position, joyRadius);
 	}
 }

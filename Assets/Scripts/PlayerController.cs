@@ -31,13 +31,15 @@ public class PlayerController : MonoBehaviour {
 		if (horizontal > 0 && flip) {
 			flip = false;
 			graphycs.Flip(false, 0);
-			frontArm.SetActive (true);
-			backArm.SetActive (false);
+			frontArm.transform.localEulerAngles = Vector3.zero;
+		//	frontArm.SetActive (true);
+		//	backArm.SetActive (false);
 		} else if (horizontal < 0 && !flip){
 			flip = true;
 			graphycs.Flip(true, 3);
-			frontArm.SetActive (false);
-			backArm.SetActive (true);
+			frontArm.transform.localEulerAngles = new Vector3(0, 180, 0);
+		//	frontArm.SetActive (false);
+		//	backArm.SetActive (true);
 		}
 
 		rb2D.velocity = new Vector2 (horizontal, rb2D.velocity.y + vertical);			

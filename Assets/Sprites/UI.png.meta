@@ -1,11 +1,13 @@
 fileFormatVersion: 2
 guid: 7bfdb9d9443a9fb49a06f536412f4203
-timeCreated: 1503608055
+timeCreated: 1503733608
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Joystick
+    21300000: CJoy
     21300002: Stick
+    21300004: VJoy
+    21300006: SwordStick
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -80,11 +82,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Joystick
+      name: CJoy
       rect:
         serializedVersion: 2
         x: 1
-        y: 7
+        y: 8
         width: 24
         height: 24
       alignment: 0
@@ -96,10 +98,36 @@ TextureImporter:
       name: Stick
       rect:
         serializedVersion: 2
-        x: 25
-        y: 25
+        x: 18
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: VJoy
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 8
         width: 6
-        height: 6
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SwordStick
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 8
+        height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
