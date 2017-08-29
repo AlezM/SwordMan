@@ -81,12 +81,7 @@ public class Joystick : MonoBehaviour {
 				}
 			}
 		}
-
-		if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled) {
-			stick.localPosition = Vector3.zero;
-			clicked = false;
-		}
-
+			
 		if (clicked) {
 			stick.position = (Vector2)cam.ScreenToWorldPoint (touch.position);
 			if (stick.localPosition.magnitude > radius)
@@ -96,6 +91,11 @@ public class Joystick : MonoBehaviour {
 			stickPrevPos = stick.localPosition;
 
 			onClick.Invoke(new JoystickInfo (stick.localPosition / radius, delta / radius));
+		}
+
+		if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled) {
+			stick.localPosition = Vector3.zero;
+			clicked = false;
 		}
 	}
 
@@ -113,10 +113,6 @@ public class Joystick : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetMouseButtonUp (0)) {
-			stick.localPosition = Vector3.zero;
-			clicked = false;
-		}
 
 		if (clicked) {
 			stick.position = (Vector2)cam.ScreenToWorldPoint (Input.mousePosition);
@@ -127,6 +123,11 @@ public class Joystick : MonoBehaviour {
 			stickPrevPos = stick.localPosition;
 
 			onClick.Invoke(new JoystickInfo (stick.localPosition / radius, delta / radius));
+		}
+
+		if (Input.GetMouseButtonUp (0)) {
+			stick.localPosition = Vector3.zero;
+			clicked = false;
 		}
 	}
 }

@@ -23,10 +23,16 @@ public class PlayerController : MonoBehaviour {
 		
 	}
 
-	public void Movement (JoystickInfo joystickInfo) {
+	void InputHandler (JoystickInfo joystickInfo) {
 		float horizontal = ((Mathf.Abs(joystickInfo.position.x) > 0.1f)? joystickInfo.position.x : 0) * moveSpeed;
 		float vertical = Mathf.Clamp(joystickInfo.deltaPosition.y, -speedLimit, speedLimit)  * jumpSpeed;
 
+
+	}
+
+	public void Movement (JoystickInfo joystickInfo) {
+		float horizontal = ((Mathf.Abs(joystickInfo.position.x) > 0.1f)? joystickInfo.position.x : 0) * moveSpeed;
+		float vertical = Mathf.Clamp(joystickInfo.deltaPosition.y, -speedLimit, speedLimit)  * jumpSpeed;
 	
 		if (horizontal > 0 && flip) {
 			flip = false;

@@ -7,6 +7,12 @@ public class LeverInfo {
 	public float position;
 	public float deltaPosition;
 
+	public float position01 { 
+		get { 
+			return 0.5f * (position + 1); 
+		}
+	}
+
 	public LeverInfo (float pos, float deltaPos) {
 		position = pos;
 		deltaPosition = deltaPos;
@@ -62,7 +68,7 @@ public class Lever : MonoBehaviour {
 				if (CheckTouchPosition (touchWorldPos)) {
 					touch = Input.GetTouch (i);
 					fingerId = touch.fingerId;
-					stick.position = new Vector3(transform.position.x, touchWorldPos.y);
+					stick.position = new Vector3 (transform.position.x, touchWorldPos.y);
 					if (Mathf.Abs (stick.localPosition.y) > length)
 						stick.localPosition = stick.localPosition.normalized * length;
 
@@ -71,11 +77,6 @@ public class Lever : MonoBehaviour {
 					clicked = true;
 				}
 			}
-		}
-
-		if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled) {
-			//	stick.localPosition = Vector3.zero;
-			clicked = false;
 		}
 
 		if (clicked) {
@@ -87,6 +88,11 @@ public class Lever : MonoBehaviour {
 			stickPrevPos = stick.localPosition.y;
 
 			onClick.Invoke(new LeverInfo (stick.localPosition.y / length, delta / length));
+		}
+
+		if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled) {
+			//	stick.localPosition = Vector3.zero;
+			clicked = false;
 		}
 	}
 
@@ -104,11 +110,6 @@ public class Lever : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetMouseButtonUp (0)) {
-		//	stick.localPosition = Vector3.zero;
-			clicked = false;
-		}
-
 		if (clicked) {
 			stick.position = new Vector3(transform.position.x, cam.ScreenToWorldPoint (Input.mousePosition).y);
 			if (Mathf.Abs (stick.localPosition.y) > length)
@@ -118,6 +119,11 @@ public class Lever : MonoBehaviour {
 			stickPrevPos = stick.localPosition.y;
 
 			onClick.Invoke(new LeverInfo (stick.localPosition.y / length, delta / length));
+		}
+
+		if (Input.GetMouseButtonUp (0)) {
+			//	stick.localPosition = Vector3.zero;
+			clicked = false;
 		}
 	}
 
