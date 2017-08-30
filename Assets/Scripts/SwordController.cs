@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GamePad;
 
 public class SwordController : MonoBehaviour {
 
@@ -21,7 +22,7 @@ public class SwordController : MonoBehaviour {
 	}
 
 	void Movement () {
-		deltaAngle = inputAngle - Vector2.Angle (transform.up, Vector2.up) * Mathf.Sin (Vector3.Cross ( Vector3.up, transform.up).z);;
+		deltaAngle = inputAngle * transform.root.localScale.x - Vector2.Angle (transform.up, Vector2.up) * Mathf.Sin (Vector3.Cross ( Vector3.up, transform.up).z);;
 		rb2D.angularVelocity = deltaAngle * rotationSpeed;
 	} 
 
