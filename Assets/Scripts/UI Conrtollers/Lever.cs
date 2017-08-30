@@ -1,26 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-
-public class LeverInfo {
-	public float position;
-	public float deltaPosition;
-
-	public float position01 { 
-		get { 
-			return 0.5f * (position + 1); 
-		}
-	}
-
-	public LeverInfo (float pos, float deltaPos) {
-		position = pos;
-		deltaPosition = deltaPos;
-	}
-}
-
-[System.Serializable]
-public class LeverEvent : UnityEvent<LeverInfo> {}
+using GamePad;
 
 public class Lever : MonoBehaviour {
 

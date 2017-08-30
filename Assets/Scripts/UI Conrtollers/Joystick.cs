@@ -1,29 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-
-public class JoystickInfo {
-	public Vector2 position;
-	public Vector2 deltaPosition;
-
-	public float magnitude {
-		get { return position.magnitude; }
-	}
-
-	public JoystickInfo () {
-		position = Vector2.zero;
-		deltaPosition = Vector2.zero;
-	}
-
-	public JoystickInfo (Vector2 pos, Vector2 deltaPos) {
-		position = pos;
-		deltaPosition = deltaPos;
-	}
-}
-
-[System.Serializable]
-public class JoystickEvent : UnityEvent<JoystickInfo> {}
+using GamePad;
 
 public class Joystick : MonoBehaviour {
 
@@ -90,6 +68,10 @@ public class Joystick : MonoBehaviour {
 			Vector2 delta = (Vector2)stick.localPosition - stickPrevPos;
 			stickPrevPos = stick.localPosition;
 
+			if (touch.phase == TouchPhase.Ended) {
+				stick.localPosition = Vector3.zero;
+			}
+
 			onClick.Invoke(new JoystickInfo (stick.localPosition / radius, delta / radius));
 		}
 
@@ -113,7 +95,6 @@ public class Joystick : MonoBehaviour {
 			}
 		}
 
-
 		if (clicked) {
 			stick.position = (Vector2)cam.ScreenToWorldPoint (Input.mousePosition);
 			if (stick.localPosition.magnitude > radius)
@@ -121,6 +102,10 @@ public class Joystick : MonoBehaviour {
 
 			Vector2 delta = (Vector2)stick.localPosition - stickPrevPos;
 			stickPrevPos = stick.localPosition;
+
+			if (Input.GetMouseButtonUp (0)) {
+				stick.localPosition = Vector3.zero;
+			}
 
 			onClick.Invoke(new JoystickInfo (stick.localPosition / radius, delta / radius));
 		}
