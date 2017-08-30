@@ -1,10 +1,10 @@
 fileFormatVersion: 2
 guid: 22b3924981cf25a45adf3abf7999238d
-timeCreated: 1504103117
+timeCreated: 1504120672
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Grass
+    21300000: Ground
     21300002: Ground
   serializedVersion: 4
   mipmaps:
@@ -80,7 +80,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Grass
+      name: Ground
       rect:
         serializedVersion: 2
         x: 0

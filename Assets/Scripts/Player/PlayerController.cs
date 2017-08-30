@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void InputHandler (JoystickInfo joystickInfo) {
-		horizontal = ((Mathf.Abs(joystickInfo.position.x) > 0.1f)? joystickInfo.position.x : 0);
+		horizontal = ((Mathf.Abs(joystickInfo.position.x) > 0.1f)? Mathf.Clamp(2 * joystickInfo.position.x, -1, 1) : 0);
 		jumpForce = Mathf.Clamp(joystickInfo.deltaPosition.magnitude, -1f, 1f);
 		vertical = joystickInfo.position.y;
 
