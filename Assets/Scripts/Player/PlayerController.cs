@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour {
 
 	//Jumping
 	bool jumped = false;
+	bool doubleJump = false;
 	float gravity;
 
 	Rigidbody2D rb2D;
@@ -48,15 +49,19 @@ public class PlayerController : MonoBehaviour {
 		ApplyAnimator ();
 	}
 		
-	void Movement () {
-		Vector2 velocity = new Vector2 (horizontal * movingSpeed, rb2D.velocity.y);
-		if (!jumped && isGrounded () && vertical > 0.6f) {
-			velocity += new Vector2 (2 * horizontal, (1 + jumpForce)) * 10 * jumpForceMultiplier ;
+	public void InputHandler (ButtonInfo buttonInfo) {
+		if (!doubleJump && (isGrounded () || jumped) && buttonInfo.phase == ButtonPhase.Down) {
+			rb2D.velocity = new Vector2 (rb2D.velocity.x, 10 * jumpForceMultiplier);
+			if (jumped)
+				doubleJump = true;
+
 			jumped = true;
 			Invoke ("CanJump", jumpDelay); 
-
-			Debug.Log ("Jump!");
 		}
+	}
+
+	void Movement () {
+		Vector2 velocity = new Vector2 (horizontal * movingSpeed, rb2D.velocity.y);
 
 		rb2D.velocity = velocity;
 	}
@@ -74,6 +79,7 @@ public class PlayerController : MonoBehaviour {
 
 	void CanJump () {
 		jumped = false;
+		doubleJump = false;
 	}
 
 	bool isGrounded () {
