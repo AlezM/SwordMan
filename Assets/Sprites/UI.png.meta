@@ -1,13 +1,19 @@
 fileFormatVersion: 2
 guid: 7bfdb9d9443a9fb49a06f536412f4203
-timeCreated: 1503733608
+timeCreated: 1504156853
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: CJoy
-    21300002: Stick
-    21300004: VJoy
-    21300006: SwordStick
+    21300002: StandartStick
+    21300004: VerticalLever
+    21300006: Sword
+    21300008: L
+    21300010: R
+    21300012: LeftArrow
+    21300014: RightArrow
+    21300016: HorizontalLever
+    21300018: J
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -86,7 +92,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 8
+        y: 39
         width: 24
         height: 24
       alignment: 0
@@ -95,11 +101,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Stick
+      name: StandartStick
       rect:
         serializedVersion: 2
-        x: 18
-        y: 0
+        x: 1
+        y: 29
         width: 8
         height: 8
       alignment: 0
@@ -108,11 +114,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: VJoy
+      name: VerticalLever
       rect:
         serializedVersion: 2
-        x: 26
-        y: 8
+        x: 27
+        y: 39
         width: 6
         height: 24
       alignment: 0
@@ -121,15 +127,93 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: SwordStick
+      name: Sword
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 11
+        y: 29
         width: 8
         height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: L
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 19
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: R
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 19
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LeftArrow
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 29
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: RightArrow
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 29
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HorizontalLever
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 57
+        width: 24
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: J
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 29
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

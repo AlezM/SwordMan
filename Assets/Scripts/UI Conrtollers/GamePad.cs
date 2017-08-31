@@ -6,6 +6,7 @@ using UnityEngine.Events;
 namespace GamePad {
 	
 //CLASSES
+	//Joystick
 	public class JoystickInfo {
 		public Vector2 position;
 		public Vector2 deltaPosition;
@@ -25,6 +26,7 @@ namespace GamePad {
 		}
 	}
 
+	//Lever
 	public class LeverInfo {
 		public float position;
 		public float deltaPosition;
@@ -40,12 +42,23 @@ namespace GamePad {
 			deltaPosition = deltaPos;
 		}
 	}
+		
+	//Button
+	public enum ButtonPhase { Down = 0, Up = 1 };
+	public class ButtonInfo {
+		public ButtonPhase phase;
+		public ButtonInfo (ButtonPhase _phase) {
+			phase = _phase;
+		}
+	}
 
 //EVENTS
 	[System.Serializable]
 	public class JoystickEvent : UnityEvent<JoystickInfo> {}
 
-
 	[System.Serializable]
 	public class LeverEvent : UnityEvent<LeverInfo> {}
+
+	[System.Serializable]
+	public class ButtonEvent : UnityEvent<ButtonInfo> {}
 }
